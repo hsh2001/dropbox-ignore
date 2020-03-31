@@ -20,5 +20,10 @@
   "bugs": {
     "url": "https://github.com/hsh2001/dropbox-ignore/issues"
   },
-  "homepage": "https://github.com/hsh2001/dropbox-ignore#readme"
+  "homepage": "https://github.com/hsh2001/dropbox-ignore#readme",
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "inquirer": "^7.1.0",
+    "shelljs": "^0.8.3"
+  }
 }
