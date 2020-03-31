@@ -3,68 +3,21 @@ const path = require('path');
 const fs = require('fs').promises;
 const del = require('del');
 const chalk = require('chalk');
-const { exec } = require('shelljs');
 const inquirer = require('inquirer');
 const { version } = require('./package.json');
+
+const languageSelect = require('./lib/language-select');
+const printLogo = require('./lib/print-logo');
+const platformSelect = require('./lib/platform-select');
+const execSilent = require('./lib/exec-silent');
 
 const { PWD } = process.env;
 
 main();
 
-function getEnvLanguage() {
-  const { env } = process;
-  return env.LC_ALL || env.LC_MESSAGES || env.LANG || env.LANGUAGE;
-}
-
-function languageSelect(choices) {
-  const language = getEnvLanguage();
-
-  if (/^ko/.test(language)) {
-    return choices.korean || choices.default;
-  } else {
-    return choices.default;
-  }
-}
-
-async function printLogo() {
-  let art = await fs.readFile(path.join(__dirname, 'ascii-art.txt'), 'utf8');
-  const tabSize = 4;
-  const artWidth = art.split('\n')[0].length + tabSize * 2;
-  const emptyLine = ' '.repeat(artWidth);
-  const tab = ' '.repeat(tabSize);
-
-  art = [...art.split('\n').map((s) => tab + s + tab), emptyLine].join('\n');
-
-  console.log(chalk.blueBright.bgWhite(art), '\n');
-  console.log(
-    `${tab}${languageSelect({
-      korean: '버전',
-      default: 'version',
-    })}: ${version}`,
-    '\n',
-  );
-}
-
-function platformSelect(choices) {
-  const { platform } = process;
-  return choices[platform] || choices.default;
-}
-
-function execSilent(code) {
-  return new Promise((resolve, reject) => {
-    exec(code, { silent: true }, (code, stdout, stderr) => {
-      if (+code === 0) {
-        resolve(stdout);
-      } else if (stderr) {
-        reject(new Error(stdout));
-      }
-    });
-  });
-}
-
 async function main() {
   let filePath, ignore, npmReinstallNeed;
-  await printLogo();
+  await printLogo(version);
 
   if (PWD) {
     const nodeModulesPath = path.join(PWD, 'node_modules');
@@ -184,5 +137,4 @@ async function main() {
   }
 }
 
-exports.printLogo = printLogo;
 exports.default = exports.main = main;
