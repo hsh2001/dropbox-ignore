@@ -96,6 +96,7 @@ async function main() {
             }),
           );
           await del(nodeModulesPath);
+          await fs.mkdir(nodeModulesPath);
         }
       }
       // eslint-disable-next-line no-empty
