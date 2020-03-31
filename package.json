@@ -1,0 +1,24 @@
+{
+  "name": "dropbox-ignore",
+  "version": "0.0.1",
+  "description": "Tool for ignore files on Dropbox.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hsh2001/dropbox-ignore.git"
+  },
+  "bin": {
+    "dropbox-ignore": "./index.js"
+  },
+  "keywords": [
+    "dropbox",
+    "tool",
+    "ignore"
+  ],
+  "author": "Seunghyun Hwang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hsh2001/dropbox-ignore/issues"
+  },
+  "homepage": "https://github.com/hsh2001/dropbox-ignore#readme"
+}
