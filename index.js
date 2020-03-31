@@ -160,6 +160,14 @@ async function main() {
 
   try {
     await execSilent(codeGetter(filePath, parseInt(+!!ignore)));
+    console.log(
+      chalk.green(
+        languageSelect({
+          korean: '무시 목록에 추가 성공',
+          default: 'Add to ignore list success',
+        }) + '!',
+      ),
+    );
   } catch (error) {
     console.log('\n', chalk.red(error.toString()));
     return;
@@ -174,15 +182,6 @@ async function main() {
     );
     await execSilent('npm i');
   }
-
-  console.log(
-    chalk.green(
-      languageSelect({
-        korean: '성공',
-        default: 'success',
-      }) + '!',
-    ),
-  );
 }
 
 exports.printLogo = printLogo;
