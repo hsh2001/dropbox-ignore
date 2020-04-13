@@ -4,6 +4,6 @@ interface SetDropboxIgnoreParam {
   silent?: boolean;
 }
 
-declare const setDropboxIgnore: (p0: SetDropboxIgnoreParam) => boolean;
+declare const setDropboxIgnore: (p0: SetDropboxIgnoreParam) => Promise<boolean>;
 
 export { setDropboxIgnore };
