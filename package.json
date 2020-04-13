@@ -1,6 +1,6 @@
 {
   "name": "dropbox-ignore",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Tool for ignore files on Dropbox.",
   "main": "index.js",
   "repository": {
