@@ -8,7 +8,7 @@
     "url": "git+https://github.com/hsh2001/dropbox-ignore.git"
   },
   "bin": {
-    "dropbox-ignore": "./index.js"
+    "dropbox-ignore": "./cli.js"
   },
   "keywords": [
     "dropbox",
