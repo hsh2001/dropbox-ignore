@@ -5,3 +5,5 @@ interface SetDropboxIgnoreParam {
 }
 
 declare const setDropboxIgnore: (p0: SetDropboxIgnoreParam) => boolean;
+
+export { setDropboxIgnore };
