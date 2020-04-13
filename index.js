@@ -1,14 +1,14 @@
 #!/usr/bin/env node
+
+const { setDropboxIgnore } = require('./lib/setDropboxIgnore');
+
 const path = require('path');
 const fs = require('fs').promises;
 const del = require('del');
-const chalk = require('chalk');
 const inquirer = require('inquirer');
 const { version } = require('./package.json');
-
 const languageSelect = require('./lib/language-select');
 const printLogo = require('./lib/print-logo');
-const platformSelect = require('./lib/platform-select');
 const execSilent = require('./lib/exec-silent');
 
 const { PWD } = process.env;
@@ -87,44 +87,7 @@ async function main() {
     ]));
   }
 
-  const codeGetter = platformSelect({
-    // macOS
-    darwin(filePath, ignore) {
-      return `xattr -w com.dropbox.ignored ${ignore} "${filePath}"`;
-    },
-
-    // windows
-    win32(filePath, ignore) {
-      return `Set-Content -Path '${filePath}'  -Stream com.dropbox.ignored -Value ${ignore}`;
-    },
-
-    // linux
-    linux(filePath, ignore) {
-      return `attr -s com.dropbox.ignored -V ${ignore} "${filePath}"`;
-    },
-
-    // unknown platform
-    default() {
-      const { platform } = process;
-      console.log(`Sorry... ${platform} is not a supported platform.`);
-      process.exit(0);
-    },
-  });
-
-  try {
-    await execSilent(codeGetter(filePath, parseInt(+!!ignore)));
-    console.log(
-      chalk.green(
-        languageSelect({
-          korean: '무시 목록에 추가 성공',
-          default: 'Add to ignore list success',
-        }) + '!',
-      ),
-    );
-  } catch (error) {
-    console.log('\n', chalk.red(error.toString()));
-    return;
-  }
+  await setDropboxIgnore({ filePath, ignore });
 
   if (npmReinstallNeed) {
     console.log(
@@ -138,3 +101,4 @@ async function main() {
 }
 
 exports.default = exports.main = main;
+exports.setDropboxIgnore = setDropboxIgnore;
