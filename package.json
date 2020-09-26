@@ -23,7 +23,7 @@
   "homepage": "https://github.com/hsh2001/dropbox-ignore#readme",
   "dependencies": {
     "chalk": "^4.0.0",
-    "del": "^5.1.0",
+    "del": "^6.0.0",
     "inquirer": "^7.1.0",
     "shelljs": "^0.8.3"
   }
